@@ -21,6 +21,7 @@
 		65B05DF218A85E800032C4FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B05DD418A85E7F0032C4FB /* UIKit.framework */; };
 		65B05DFA18A85E800032C4FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65B05DF818A85E800032C4FB /* InfoPlist.strings */; };
 		65B05DFC18A85E800032C4FB /* UITableViewSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B05DFB18A85E800032C4FB /* UITableViewSampleTests.m */; };
+		65B05E0718A861FE0032C4FB /* TablaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B05E0618A861FE0032C4FB /* TablaViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		65B05DF718A85E800032C4FB /* UITableViewSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UITableViewSampleTests-Info.plist"; sourceTree = "<group>"; };
 		65B05DF918A85E800032C4FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65B05DFB18A85E800032C4FB /* UITableViewSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITableViewSampleTests.m; sourceTree = "<group>"; };
+		65B05E0518A861FD0032C4FB /* TablaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablaViewController.h; sourceTree = "<group>"; };
+		65B05E0618A861FE0032C4FB /* TablaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablaViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				65B05DE618A85E800032C4FB /* ViewController.m */,
 				65B05DE818A85E800032C4FB /* Images.xcassets */,
 				65B05DD718A85E7F0032C4FB /* Supporting Files */,
+				65B05E0518A861FD0032C4FB /* TablaViewController.h */,
+				65B05E0618A861FE0032C4FB /* TablaViewController.m */,
 			);
 			path = UITableViewSample;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				65B05DE718A85E800032C4FB /* ViewController.m in Sources */,
 				65B05DE118A85E800032C4FB /* AppDelegate.m in Sources */,
 				65B05DDD18A85E7F0032C4FB /* main.m in Sources */,
+				65B05E0718A861FE0032C4FB /* TablaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
