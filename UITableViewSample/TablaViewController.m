@@ -8,7 +8,22 @@
 
 #import "TablaViewController.h"
 
-@interface TablaViewController ()
+@interface TablaViewController () {
+    UIColor *blueColor;
+}
+
+@property (strong, nonatomic) NSArray *dataArray;
+
+@property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) UIView *footerView;
+
+@property (strong, nonatomic) UIButton *spinner1Button;
+@property (strong, nonatomic) UIButton *spinner2Button;
+@property (strong, nonatomic) UIButton *spinner3Button;
+
+@property (strong, nonatomic) UILabel *amountLabel;
+@property (strong, nonatomic) UILabel *currencyLabel;
+@property (strong, nonatomic) UILabel *amountTitleLabel;
 
 @end
 
@@ -26,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    blueColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -33,27 +50,73 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    _dataArray = [[NSArray alloc] initWithObjects:@"Enero", @"Febrero", @"Marzo", @"Abril", @"Mayo", @"Junio", @"Julio", @"Agosto", @"Septiembre", @"Octubre", @"Noviembre", @"Diciembre", nil];
+    
     [self.tableView setBackgroundColor:[UIColor redColor]];
 
     [self.tableView setContentInset:UIEdgeInsetsMake(44,0,44,0)];
 
 //    self.tableView.frame = CGRectMake(0, 0, 320, 500);
-    
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
-    UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, 200, 20)];
-    [labelView setText:@"Cabezera"];
-    [headerView addSubview:labelView];
-    [headerView setBackgroundColor:[UIColor colorWithRed:0 green:1 blue:0 alpha:0.5]];
-//    self.tableView.tableHeaderView = headerView;
-    [self.navigationController.view addSubview:headerView];
-    
-    
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 436, 320, 44)];
-//    [footerView addSubview:labelView];
-    [footerView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:1 alpha:0.5]];
 
-    [self.navigationController.view addSubview:footerView];
+    [self configHeader];
+    [self configFooter];
+}
+
+- (void) configHeader {
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
+    [_headerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
+    
+    _spinner1Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    _spinner2Button = [[UIButton alloc] initWithFrame:CGRectMake(110, 0, 100, 44)];
+    _spinner3Button = [[UIButton alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+    
+    [_spinner1Button setTitle:@"Fondo" forState:UIControlStateNormal];
+    [_spinner2Button setTitle:@"Cuenta" forState:UIControlStateNormal];
+    [_spinner3Button setTitle:@"Periodo" forState:UIControlStateNormal];
+    
+    [_spinner1Button setTitleColor:blueColor forState:UIControlStateNormal];
+    [_spinner1Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    
+    [_spinner2Button setTitleColor:blueColor forState:UIControlStateNormal];
+    [_spinner2Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    
+    [_spinner3Button setTitleColor:blueColor forState:UIControlStateNormal];
+    [_spinner3Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    
+    [_headerView addSubview:_spinner1Button];
+    [_headerView addSubview:_spinner2Button];
+    [_headerView addSubview:_spinner3Button];
+    
+    //    self.tableView.tableHeaderView = headerView;
+    [self.navigationController.view addSubview:_headerView];
+}
+
+- (void) configFooter {
+    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 436, 320, 44)];
+    [_footerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 4)];
+    lineView.backgroundColor = blueColor;
+    
+    _amountTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 100, 42)];
+    [_amountTitleLabel setTextColor:[UIColor grayColor]];
+    [_amountTitleLabel setText:@"MONTO"];
+    [_amountTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+    
+    _currencyLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 100, 42)];
+    [_currencyLabel setText:@"USD"];
+    [_currencyLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:22]];
+    
+    _amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 2, 100, 42)];
+    [_amountLabel setText:@"1,234.56"];
+    [_amountLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:22]];
+    
+    [_footerView addSubview:lineView];
+    [_footerView addSubview:_amountTitleLabel];
+    [_footerView addSubview:_currencyLabel];
+    [_footerView addSubview:_amountLabel];
+    
+    [self.navigationController.view addSubview:_footerView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,29 +130,22 @@
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_dataArray count];
+}
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
+    
+    return cell;
+}
 
 /*
 // Override to support conditional editing of the table view.
