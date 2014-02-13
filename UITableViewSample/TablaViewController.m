@@ -54,7 +54,7 @@
     
     [self.tableView setBackgroundColor:[UIColor redColor]];
 
-    [self.tableView setContentInset:UIEdgeInsetsMake(44,0,44,0)];
+    [self.tableView setContentInset:UIEdgeInsetsMake(44, 0, 44, 0)];
 
 //    self.tableView.frame = CGRectMake(0, 0, 320, 500);
 
