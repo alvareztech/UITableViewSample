@@ -43,49 +43,63 @@
     [super viewDidLoad];
     
     blueColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _dataArray = [[NSArray alloc] initWithObjects:@"Enero", @"Febrero", @"Marzo", @"Abril", @"Mayo", @"Junio", @"Julio", @"Agosto", @"Septiembre", @"Octubre", @"Noviembre", @"Diciembre", nil];
     
     [self.tableView setBackgroundColor:[UIColor redColor]];
-
+    
     [self.tableView setContentInset:UIEdgeInsetsMake(44, 0, 44, 0)];
-
-//    self.tableView.frame = CGRectMake(0, 0, 320, 500);
-
+    
+    //    self.tableView.frame = CGRectMake(0, 0, 320, 500);
+    
     [self configHeader];
     [self configFooter];
 }
 
 - (void) configHeader {
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
-    [_headerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
+//    [_headerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
     
-    _spinner1Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
-    _spinner2Button = [[UIButton alloc] initWithFrame:CGRectMake(110, 0, 100, 44)];
-    _spinner3Button = [[UIButton alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+//    _spinner1Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+//    _spinner2Button = [[UIButton alloc] initWithFrame:CGRectMake(110, 0, 100, 44)];
+//    _spinner3Button = [[UIButton alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+//    
+//    [_spinner1Button setTitle:@"Fondo" forState:UIControlStateNormal];
+//    [_spinner2Button setTitle:@"Cuenta" forState:UIControlStateNormal];
+//    [_spinner3Button setTitle:@"Periodo" forState:UIControlStateNormal];
+//    
+//    [_spinner1Button setTitleColor:blueColor forState:UIControlStateNormal];
+//    [_spinner1Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+//    
+//    [_spinner2Button setTitleColor:blueColor forState:UIControlStateNormal];
+//    [_spinner2Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+//    
+//    [_spinner3Button setTitleColor:blueColor forState:UIControlStateNormal];
+//    [_spinner3Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
     
-    [_spinner1Button setTitle:@"Fondo" forState:UIControlStateNormal];
-    [_spinner2Button setTitle:@"Cuenta" forState:UIControlStateNormal];
-    [_spinner3Button setTitle:@"Periodo" forState:UIControlStateNormal];
+    UIBarButtonItem *oneButton = [[UIBarButtonItem alloc] initWithTitle:@"PUE687142387" style:UIBarButtonItemStyleBordered target:self action:nil];
+
+    UIBarButtonItem *twoButton = [[UIBarButtonItem alloc] initWithTitle:@"Y si este periodo es muy largo " style:UIBarButtonItemStyleBordered target:self action:nil];
     
-    [_spinner1Button setTitleColor:blueColor forState:UIControlStateNormal];
-    [_spinner1Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    UIBarButtonItem *threeButton = [[UIBarButtonItem alloc] initWithTitle:@"USD" style:UIBarButtonItemStyleBordered target:self action:nil];
     
-    [_spinner2Button setTitleColor:blueColor forState:UIControlStateNormal];
-    [_spinner2Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:self
+                                                                               action:nil];
     
-    [_spinner3Button setTitleColor:blueColor forState:UIControlStateNormal];
-    [_spinner3Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:oneButton, separator, twoButton, separator, threeButton, nil];
     
-    [_headerView addSubview:_spinner1Button];
-    [_headerView addSubview:_spinner2Button];
-    [_headerView addSubview:_spinner3Button];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolbar setItems:items];
+    
+    
+    [_headerView addSubview:toolbar];
     
     //    self.tableView.tableHeaderView = headerView;
     [self.navigationController.view addSubview:_headerView];
@@ -148,54 +162,54 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
+ #pragma mark - Navigation
+ 
+ // In a story board-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ 
  */
 
 @end

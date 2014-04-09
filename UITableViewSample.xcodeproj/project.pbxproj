@@ -387,6 +387,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UITableViewSample/UITableViewSample-Prefix.pch";
 				INFOPLIST_FILE = "UITableViewSample/UITableViewSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -400,6 +401,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UITableViewSample/UITableViewSample-Prefix.pch";
 				INFOPLIST_FILE = "UITableViewSample/UITableViewSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -466,6 +468,7 @@
 				65B05E0118A85E800032C4FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65B05E0218A85E800032C4FB /* Build configuration list for PBXNativeTarget "UITableViewSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +477,7 @@
 				65B05E0418A85E800032C4FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
