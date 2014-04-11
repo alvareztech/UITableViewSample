@@ -29,8 +29,7 @@
 
 @implementation TablaViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -38,8 +37,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     blueColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
@@ -50,7 +48,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    _dataArray = [[NSArray alloc] initWithObjects:@"Enero", @"Febrero", @"Marzo", @"Abril", @"Mayo", @"Junio", @"Julio", @"Agosto", @"Septiembre", @"Octubre", @"Noviembre", @"Diciembre", nil];
+    self.dataArray = [[NSArray alloc] initWithObjects:@"Enero", @"Febrero", @"Marzo", @"Abril", @"Mayo", @"Junio", @"Julio", @"Agosto", @"Septiembre", @"Octubre", @"Noviembre", @"Diciembre", nil];
     
     [self.tableView setBackgroundColor:[UIColor redColor]];
     
@@ -63,28 +61,10 @@
 }
 
 - (void) configHeader {
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
-//    [_headerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
-    
-//    _spinner1Button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
-//    _spinner2Button = [[UIButton alloc] initWithFrame:CGRectMake(110, 0, 100, 44)];
-//    _spinner3Button = [[UIButton alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
-//    
-//    [_spinner1Button setTitle:@"Fondo" forState:UIControlStateNormal];
-//    [_spinner2Button setTitle:@"Cuenta" forState:UIControlStateNormal];
-//    [_spinner3Button setTitle:@"Periodo" forState:UIControlStateNormal];
-//    
-//    [_spinner1Button setTitleColor:blueColor forState:UIControlStateNormal];
-//    [_spinner1Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-//    
-//    [_spinner2Button setTitleColor:blueColor forState:UIControlStateNormal];
-//    [_spinner2Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-//    
-//    [_spinner3Button setTitleColor:blueColor forState:UIControlStateNormal];
-//    [_spinner3Button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
     
     UIBarButtonItem *oneButton = [[UIBarButtonItem alloc] initWithTitle:@"PUE687142387" style:UIBarButtonItemStyleBordered target:self action:nil];
-
+    
     UIBarButtonItem *twoButton = [[UIBarButtonItem alloc] initWithTitle:@"Y si este periodo es muy largo " style:UIBarButtonItemStyleBordered target:self action:nil];
     
     UIBarButtonItem *threeButton = [[UIBarButtonItem alloc] initWithTitle:@"USD" style:UIBarButtonItemStyleBordered target:self action:nil];
@@ -99,45 +79,194 @@
     [toolbar setItems:items];
     
     
-    [_headerView addSubview:toolbar];
+    
+    
+    
+    
+    [self.headerView addSubview:toolbar];
     
     //    self.tableView.tableHeaderView = headerView;
-    [self.navigationController.view addSubview:_headerView];
+    [self.navigationController.view addSubview:self.headerView];
+    
+
+    // Toolbar
+    [toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:toolbar
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                              multiplier:1
+                                                                                constant:0]];
+
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:toolbar
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                              multiplier:1
+                                                                                constant:44]];
+    
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:toolbar
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                              multiplier:1.0
+                                                                                constant:0.0]];
+    
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:toolbar
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeTop
+                                                                              multiplier:1.0
+                                                                                constant:0.0]];
 }
 
 - (void) configFooter {
-    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 436, 320, 44)];
-    [_footerView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.85]];
+    self.footerView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.footerView setBackgroundColor:[UIColor colorWithRed:0 green:1 blue:0 alpha:0.85]];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 4)];
     lineView.backgroundColor = blueColor;
+    [lineView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    _amountTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 100, 42)];
-    [_amountTitleLabel setTextColor:[UIColor grayColor]];
-    [_amountTitleLabel setText:@"MONTO"];
-    [_amountTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+    self.amountTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 100, 42)];
+    [self.amountTitleLabel setTextColor:[UIColor grayColor]];
+    [self.amountTitleLabel setText:@"MONTO"];
+    [self.amountTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+    self.amountTitleLabel.backgroundColor = [UIColor clearColor];
     
-    _currencyLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 100, 42)];
-    [_currencyLabel setText:@"USD"];
-    [_currencyLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:22]];
+    self.currencyLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 100, 42)];
+    [self.currencyLabel setText:@"USD"];
+    [self.currencyLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:22]];
+    self.currencyLabel.backgroundColor = [UIColor clearColor];
     
-    _amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 2, 100, 42)];
-    [_amountLabel setText:@"1,234.56"];
-    [_amountLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:22]];
+    self.amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 2, 100, 42)];
+    [self.amountLabel setText:@"1,234.56"];
+    [self.amountLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:22]];
+    self.amountLabel.backgroundColor = [UIColor clearColor];
     
-    [_footerView addSubview:lineView];
-    [_footerView addSubview:_amountTitleLabel];
-    [_footerView addSubview:_currencyLabel];
-    [_footerView addSubview:_amountLabel];
+    [self.footerView addSubview:lineView];
+    [self.footerView addSubview:self.amountTitleLabel];
+    [self.footerView addSubview:self.currencyLabel];
+    [self.footerView addSubview:self.amountLabel];
+    [self.footerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [self.navigationController.view addSubview:_footerView];
+    
+    [self.navigationController.view addSubview:self.footerView];
+    
+    // Width constraint, half of parent view width
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.footerView
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                              multiplier:1
+                                                                                constant:0]];
+    
+    // Height constraint, half of parent view height
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.footerView
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                              multiplier:1
+                                                                                constant:44]];
+    
+    // Center horizontally
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.footerView
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                              multiplier:1.0
+                                                                                constant:0.0]];
+    
+    // Center vertically
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.footerView
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeBottom
+                                                                              multiplier:1.0
+                                                                                constant:0.0]];
+    
+    // LINE
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:lineView
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                              multiplier:0.5
+                                                                                constant:0]];
+    
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:lineView
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                              multiplier:1
+                                                                                constant:4]];
+    
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:lineView
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.navigationController.view
+                                                                               attribute:NSLayoutAttributeCenterX
+                                                                              multiplier:1
+                                                                                constant:0]];
+    
+    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:lineView
+                                                                               attribute:NSLayoutAttributeTop // Botton
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.footerView
+                                                                               attribute:NSLayoutAttributeTop
+                                                                              multiplier:1.0
+                                                                                constant:0.0]];
+    
+    // LINE
+//    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.amountLabel
+//                                                                               attribute:NSLayoutAttributeWidth
+//                                                                               relatedBy:NSLayoutRelationEqual
+//                                                                                  toItem:self.navigationController.view
+//                                                                               attribute:NSLayoutAttributeWidth
+//                                                                              multiplier:1
+//                                                                                constant:0]];
+//    
+//    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.amountLabel
+//                                                                               attribute:NSLayoutAttributeHeight
+//                                                                               relatedBy:NSLayoutRelationEqual
+//                                                                                  toItem:nil
+//                                                                               attribute:NSLayoutAttributeHeight
+//                                                                              multiplier:1
+//                                                                                constant:20]];
+//    
+//    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.amountLabel
+//                                                                               attribute:NSLayoutAttributeCenterX
+//                                                                               relatedBy:NSLayoutRelationEqual
+//                                                                                  toItem:self.navigationController.view
+//                                                                               attribute:NSLayoutAttributeCenterX
+//                                                                              multiplier:1
+//                                                                                constant:0]];
+//    
+//    [self.navigationController.view addConstraint:[NSLayoutConstraint constraintWithItem:self.amountLabel
+//                                                                               attribute:NSLayoutAttributeBottom
+//                                                                               relatedBy:NSLayoutRelationEqual
+//                                                                                  toItem:self.footerView
+//                                                                               attribute:NSLayoutAttributeTop
+//                                                                              multiplier:1.0
+//                                                                                constant:0.0]];
+//    
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)hacerAlgo:(UIButton *)sender {
     NSLog(@"SE PRESIONO HACER ALGO");
 }
@@ -149,7 +278,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_dataArray count];
+    return [self.dataArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -157,6 +286,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
+    
+    if (indexPath.row % 2 == 0) {
+        cell.backgroundColor = [UIColor whiteColor];
+    } else {
+        cell.backgroundColor = [UIColor lightGrayColor];
+    }
     
     return cell;
 }
