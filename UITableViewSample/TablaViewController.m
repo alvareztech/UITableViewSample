@@ -7,6 +7,7 @@
 //
 
 #import "TablaViewController.h"
+#import "MyCustomTableViewCell.h"
 
 @interface TablaViewController () {
     UIColor *blueColor;
@@ -24,6 +25,8 @@
 @property (strong, nonatomic) UILabel *amountLabel;
 @property (strong, nonatomic) UILabel *currencyLabel;
 @property (strong, nonatomic) UILabel *amountTitleLabel;
+
+@property (strong, nonatomic) NSIndexPath *selectedRowIndexPath;
 
 @end
 
@@ -307,30 +310,128 @@
     NSLog(@"SE PRESIONO HACER ALGO");
 }
 
-#pragma mark - Table view data source
+#pragma mark - TableView data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.selectedRowIndexPath && self.selectedRowIndexPath.section == section) {
+        return [self.dataArray count] + 1;
+    }
     return [self.dataArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    static NSString *CellIdentifier = @"Cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    
+//    [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
+//    
+//    if (indexPath.row % 2 == 0) {
+//        cell.backgroundColor = [UIColor whiteColor];
+//    } else {
+//        cell.backgroundColor = [UIColor lightGrayColor];
+//    }
+//
     
-    [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
-    
-    if (indexPath.row % 2 == 0) {
-        cell.backgroundColor = [UIColor whiteColor];
+    if ([self isExtendedCellIndexPath:indexPath]) {
+        
     } else {
-        cell.backgroundColor = [UIColor lightGrayColor];
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
+        [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    UITableViewCell *cell;
+    if (self.selectedRowIndexPath) {
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
+        [cell textLabel].text = [_dataArray objectAtIndex:indexPath.row];
+        return cell;
+    } else {
+        if (indexPath.row > self.selectedRowIndexPath.row) {
+            
+        } else {
+            
+        }
+        MyCustomTableViewCell *cell2 = [tableView dequeueReusableCellWithIdentifier:@"mycell"];
+        if (!cell2) {
+            [tableView registerNib:[UINib nibWithNibName:@"MyCustomCell" bundle:nil] forCellReuseIdentifier:@"mycell"];
+            cell2 = [tableView dequeueReusableCellWithIdentifier:@"mycell"];
+        }
+        cell2.titleText.text = @"Cell expandida";
+        return cell2;
     }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Select");
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [tableView beginUpdates];
+    
+    if (self.selectedRowIndexPath) {
+        if ([self isSelectedIndexPath:indexPath]) {
+            NSIndexPath *tempIndexPath = self.selectedRowIndexPath;
+            self.selectedRowIndexPath = nil;
+            [self removeCellBelowIndexPath:tempIndexPath];
+        } else if ([self isExtendedCellIndexPath:indexPath]) {
+            // nothing
+        } else {
+            NSIndexPath *tempIndexPath = self.selectedRowIndexPath;
+            if (indexPath.row > self.selectedRowIndexPath.row && indexPath.section == self.selectedRowIndexPath.section) {
+                indexPath = [NSIndexPath indexPathForRow:(indexPath.row-1) inSection:indexPath.section];
+            }
+            self.selectedRowIndexPath = indexPath;
+            [self removeCellBelowIndexPath:tempIndexPath];
+            [self insertCellBelowIndexPath:indexPath];
+        }
+    } else {
+        self.selectedRowIndexPath = indexPath;
+        [self insertCellBelowIndexPath:indexPath];
+    }
+    
+    [tableView endUpdates];
+    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+#pragma mark - Utils
+- (void)insertCellBelowIndexPath:(NSIndexPath *)indexPath {
+    indexPath = [NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSArray *pathsArray = @[indexPath];
+    [self.tableView insertRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
+}
+
+- (void)removeCellBelowIndexPath:(NSIndexPath *)indexPath {
+    indexPath = [NSIndexPath indexPathForRow:(indexPath.row+1) inSection:indexPath.section];
+    NSArray *pathsArray = @[indexPath];
+    [self.tableView deleteRowsAtIndexPaths:pathsArray withRowAnimation:UITableViewRowAnimationTop];
+}
+
+- (BOOL)isSelectedIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath && self.selectedRowIndexPath) {
+        if (indexPath.row == self.selectedRowIndexPath.row && indexPath.section == self.selectedRowIndexPath.section) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)isExtendedCellIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath && self.selectedRowIndexPath) {
+        if (indexPath.row == self.selectedRowIndexPath.row+1 && indexPath.section == self.selectedRowIndexPath.section) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 
 /*
  // Override to support conditional editing of the table view.

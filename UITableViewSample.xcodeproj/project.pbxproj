@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E2E05C718FC730100822F8D /* MyCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E2E05C618FC730100822F8D /* MyCustomCell.xib */; };
+		4E2E05CA18FC741700822F8D /* MyCustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E05C918FC741700822F8D /* MyCustomTableViewCell.m */; };
 		65B05DD118A85E7F0032C4FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B05DD018A85E7F0032C4FB /* Foundation.framework */; };
 		65B05DD318A85E7F0032C4FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B05DD218A85E7F0032C4FB /* CoreGraphics.framework */; };
 		65B05DD518A85E7F0032C4FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B05DD418A85E7F0032C4FB /* UIKit.framework */; };
@@ -35,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E2E05C618FC730100822F8D /* MyCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCustomCell.xib; sourceTree = "<group>"; };
+		4E2E05C818FC741700822F8D /* MyCustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomTableViewCell.h; sourceTree = "<group>"; };
+		4E2E05C918FC741700822F8D /* MyCustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomTableViewCell.m; sourceTree = "<group>"; };
 		65B05DCD18A85E7F0032C4FB /* UITableViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITableViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B05DD018A85E7F0032C4FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65B05DD218A85E7F0032C4FB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +120,7 @@
 		65B05DD618A85E7F0032C4FB /* UITableViewSample */ = {
 			isa = PBXGroup;
 			children = (
+				4E2E05C618FC730100822F8D /* MyCustomCell.xib */,
 				65B05DDF18A85E7F0032C4FB /* AppDelegate.h */,
 				65B05DE018A85E800032C4FB /* AppDelegate.m */,
 				65B05DE218A85E800032C4FB /* Main.storyboard */,
@@ -124,6 +130,8 @@
 				65B05DD718A85E7F0032C4FB /* Supporting Files */,
 				65B05E0518A861FD0032C4FB /* TablaViewController.h */,
 				65B05E0618A861FE0032C4FB /* TablaViewController.m */,
+				4E2E05C818FC741700822F8D /* MyCustomTableViewCell.h */,
+				4E2E05C918FC741700822F8D /* MyCustomTableViewCell.m */,
 			);
 			path = UITableViewSample;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 			files = (
 				65B05DE918A85E800032C4FB /* Images.xcassets in Resources */,
 				65B05DDB18A85E7F0032C4FB /* InfoPlist.strings in Resources */,
+				4E2E05C718FC730100822F8D /* MyCustomCell.xib in Resources */,
 				65B05DE418A85E800032C4FB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +267,7 @@
 				65B05DE118A85E800032C4FB /* AppDelegate.m in Sources */,
 				65B05DDD18A85E7F0032C4FB /* main.m in Sources */,
 				65B05E0718A861FE0032C4FB /* TablaViewController.m in Sources */,
+				4E2E05CA18FC741700822F8D /* MyCustomTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
